@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>特定商取引法に基づく表記 ｜ Claude Code完全マスタースクール</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+      font-size: 17px;
+      line-height: 1.9;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .bg-wrapper {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #050510 0%, #0d0d20 30%, #0a1020 70%, #0a0a0a 100%);
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 50px 20px 80px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 44px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(212,175,55,0.25);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      margin-bottom: 20px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: #d4af37; }
+
+    .page-header h1 {
+      font-size: clamp(20px, 5.5vw, 26px);
+      font-weight: 900;
+      background: linear-gradient(180deg, #fff 0%, #f0e0a0 60%, #d4af37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.5;
+    }
+
+    /* ===== TABLE ===== */
+    .tokusho-table {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .tokusho-row {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .tokusho-row:last-child { border-bottom: none; }
+
+    .tokusho-th {
+      padding: 18px 18px;
+      background: rgba(212,175,55,0.07);
+      border-right: 1px solid rgba(212,175,55,0.15);
+      font-size: 15px;
+      font-weight: 700;
+      color: #d4af37;
+      display: flex;
+      align-items: flex-start;
+      line-height: 1.6;
+    }
+
+    .tokusho-td {
+      padding: 18px 18px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.85;
+    }
+
+    .tokusho-td strong { color: #fff; font-weight: 700; }
+
+    .tokusho-td .note {
+      display: block;
+      font-size: 13px;
+      color: rgba(255,255,255,0.38);
+      margin-top: 5px;
+      line-height: 1.65;
+    }
+
+    /* ===== INFO BOXES ===== */
+    .info-box {
+      background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(212,175,55,0.02));
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 14px;
+      padding: 22px 22px;
+      margin-bottom: 20px;
+    }
+
+    .info-box h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #d4af37;
+      margin-bottom: 10px;
+    }
+
+    .info-box p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.85;
+      margin-bottom: 8px;
+    }
+
+    .info-box p:last-child { margin-bottom: 0; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      margin-top: 12px;
+    }
+
+    .footer a {
+      display: inline-block;
+      font-size: 14px;
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+      margin-bottom: 12px;
+      transition: color 0.2s;
+    }
+
+    .footer a:hover { color: #d4af37; }
+    .footer p { font-size: 13px; color: rgba(255,255,255,0.2); }
+
+    @media (max-width: 480px) {
+      .tokusho-row { grid-template-columns: 1fr; }
+      .tokusho-th {
+        border-right: none;
+        border-bottom: 1px solid rgba(212,175,55,0.15);
+        padding: 14px 16px 10px;
+      }
+      .tokusho-td { padding: 10px 16px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-wrapper">
+    <div class="container">
+
+      <div class="page-header">
+        <a href="https://cosmic-strudel-8dfd2b.netlify.app/" target="_blank" rel="noopener" class="back-link">← トップページへ戻る</a>
+        <h1>特定商取引法に基づく表記</h1>
+      </div>
+
+      <div class="tokusho-table">
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">販売業者</div>
+          <div class="tokusho-td">
+            <strong>まほのスマホ相談所</strong>
+          </div>
+        </div>
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">運営責任者</div>
+          <div class="tokusho-td">
+            <strong>廣田龍</strong>
+          </div>
+        </div>
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">所在地</div>
+          <div class="tokusho-td">
+            請求があった場合に遅滞なく開示いたします。
+            <span class="note">※お問い合わせは公式LINEにてお受けしております。</span>
+          </div>
+        </div>
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">電話番号</div>
+          <div class="tokusho-td">
+            請求があった場合に遅滞なく開示いたします。
+            <span class="note">※お問い合わせは公式LINEにてお受けしております。</span>
+          </div>
+        </div>
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">メールアドレス</div>
+          <div class="tokusho-td">
+            <strong>mahosumaho123@gmail.com</strong>
+          </div>
+        </div>
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">商品名</div>
+          <div class="tokusho-td">
+            <strong>Claude Code完全マスタースクール（デジタルコンテンツ・PDFファイル）</strong>
+          </div>
+        </div>
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">販売価格</div>
+          <div class="tokusho-td">
+            <strong>¥237,600（税込）</strong>
+            <span class="note">※一括払い・分割払いをお選びいただけます。</span>
+          </div>
+        </div>
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">分割払い</div>
+          <div class="tokusho-td">
+            12回分割：月々 ¥19,800 × 12回<br>
+            6回分割：月々 ¥39,600 × 6回<br>
+            3回分割：月々 ¥79,200 × 3回
+          </div>
+        </div>
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">商品代金以外の<br>必要料金</div>
+          <div class="tokusho-td">
+            消費税（販売価格に含まれています）<br>
+            インターネット接続に必要な通信費（お客様負担）<br>
+            <strong>Claude Proプラン月額料金：約月$20（約3,000円〜/月・為替レートにより変動）</strong>
+            <span class="note">※Claude Codeをご利用いただくために、Anthropic社のClaude Proプランへの加入が別途必要です。料金はAnthropicに直接お支払いいただくもので、本講座料金には含まれません。</span>
+          </div>
+        </div>
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">支払方法</div>
+          <div class="tokusho-td">
+            クレジットカード決済（VISA・Mastercard・JCB 等）
+          </div>
+        </div>
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">支払時期</div>
+          <div class="tokusho-td">
+            ご注文手続き完了時（クレジットカード会社の規定による）
+          </div>
+        </div>
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">商品の引渡し<br>時期・方法</div>
+          <div class="tokusho-td">
+            ご決済完了後、<strong>すぐにダウンロードリンクをお届けします。</strong><br>
+            スマートフォン・パソコン・タブレットからいつでもご覧いただけます。
+          </div>
+        </div>
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">返品・キャンセル<br>について</div>
+          <div class="tokusho-td">
+            デジタルコンテンツの性質上、<strong>ご購入後の返金・返品はお受けしておりません。</strong><br>
+            ご不明な点は購入前に公式LINEよりお気軽にお問い合わせください。
+          </div>
+        </div>
+
+        <div class="tokusho-row">
+          <div class="tokusho-th">動作環境</div>
+          <div class="tokusho-td">
+            PDFファイルを閲覧できる端末<br>
+            <span class="note">iOS / Android / Windows / Mac いずれも対応</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="info-box">
+        <h3>所在地・電話番号の開示について</h3>
+        <p>当店は個人事業主として運営しております。所在地・電話番号は、特定商取引法の規定に基づき、請求があった場合に遅滞なく開示いたします。</p>
+        <p>開示をご希望の方は、公式LINEよりご連絡ください。</p>
+      </div>
+
+      <div class="info-box">
+        <h3>お問い合わせ</h3>
+        <p>ご購入前・ご購入後のご質問は、公式LINEよりお気軽にご連絡ください。</p>
+        <p>メールでのお問い合わせ：<strong>mahosumaho123@gmail.com</strong></p>
+      </div>
+
+      <div class="footer">
+        <a href="https://cosmic-strudel-8dfd2b.netlify.app/" target="_blank" rel="noopener">← トップページへ戻る</a>
+        <p>© 2025 まほのスマホ相談所</p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

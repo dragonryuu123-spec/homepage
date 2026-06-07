@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code完全マスタースクール ｜ AIで仕事を自動化する完全ガイド</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+      font-size: 18px;
+      line-height: 1.9;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .bg-wrapper {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #050510 0%, #0d0d20 30%, #0a1020 70%, #0a0a0a 100%);
+      position: relative;
+    }
+
+    .bg-wrapper::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(212,175,55,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(99,179,237,0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particles {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: float-up linear infinite;
+    }
+
+    @keyframes float-up {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.4; }
+      100% { transform: translateY(-100px) scale(1); opacity: 0; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .gold-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 16px 0 36px;
+    }
+    .gold-divider::before,
+    .gold-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    }
+    .gold-divider span { color: #d4af37; font-size: 18px; }
+
+    /* ===== TOP BADGE ===== */
+    .top-badge {
+      text-align: center;
+      padding: 44px 0 0;
+    }
+
+    .badge-label {
+      display: inline-block;
+      background: linear-gradient(90deg, #b8860b, #d4af37, #f5e070, #d4af37, #b8860b);
+      background-size: 200% auto;
+      animation: shimmer 3s linear infinite;
+      color: #0a0a0a;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      padding: 12px 32px;
+      border-radius: 50px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      text-align: center;
+      padding: 28px 0 32px;
+    }
+
+    .hero-eyecatch {
+      font-size: 16px;
+      color: rgba(212,175,55,0.85);
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 7.5vw, 42px);
+      font-weight: 900;
+      line-height: 1.45;
+      margin-bottom: 22px;
+      background: linear-gradient(180deg, #ffffff 0%, #f0e0a0 50%, #d4af37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      background: linear-gradient(90deg, #63b3ed, #90cdf4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-lead {
+      font-size: 18px;
+      line-height: 2;
+      color: rgba(255,255,255,0.78);
+      margin: 0 auto 10px;
+    }
+
+    .hero-lead strong { color: #f5e070; font-weight: 700; }
+
+    /* ===== VISUAL APPEAL BOX ===== */
+    .visual-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 40px;
+      justify-content: center;
+    }
+
+    .visual-chip {
+      flex: 1;
+      max-width: 160px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(212,175,55,0.03));
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 16px;
+      padding: 18px 10px;
+      text-align: center;
+    }
+
+    .visual-chip .vc-icon { font-size: 36px; display: block; margin-bottom: 8px; }
+    .visual-chip .vc-text { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.8); line-height: 1.5; }
+
+    /* ===== PROBLEM ===== */
+    .problem-section {
+      background: linear-gradient(135deg, rgba(255,80,80,0.05), rgba(255,80,80,0.02));
+      border: 1px solid rgba(255,120,120,0.2);
+      border-radius: 20px;
+      padding: 28px 22px;
+      margin-bottom: 12px;
+    }
+
+    .section-label {
+      font-size: 14px;
+      color: #d4af37;
+      letter-spacing: 3px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .problem-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .problem-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+
+    .problem-x {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: rgba(229,62,62,0.25);
+      border: 1px solid rgba(229,62,62,0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #fc8181;
+      font-weight: 900;
+    }
+
+    .problem-text {
+      font-size: 16px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.55;
+    }
+
+    .solve-arrow {
+      text-align: center;
+      font-size: 36px;
+      color: #d4af37;
+      margin: 14px 0;
+      animation: bounce 1.5s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(6px); }
+    }
+
+    .solve-box {
+      background: linear-gradient(135deg, rgba(212,175,55,0.14), rgba(212,175,55,0.04));
+      border: 1px solid rgba(212,175,55,0.45);
+      border-radius: 16px;
+      padding: 22px 20px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .solve-box .solve-icon { font-size: 48px; display: block; margin-bottom: 12px; }
+
+    .solve-box p {
+      font-size: 19px;
+      font-weight: 900;
+      color: #f5e070;
+      line-height: 1.8;
+    }
+
+    /* ===== COURSE CONTENTS ===== */
+    .contents-section { margin-bottom: 44px; }
+
+    .section-heading { text-align: center; margin-bottom: 26px; }
+    .section-heading .label {
+      font-size: 13px; color: #d4af37; letter-spacing: 3px;
+      font-weight: 700; display: block; margin-bottom: 8px;
+    }
+    .section-heading h2 {
+      font-size: clamp(22px, 5.5vw, 30px);
+      font-weight: 900; color: #fff; line-height: 1.5;
+    }
+
+    .content-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(212,175,55,0.04) 100%);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 20px;
+      padding: 0;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .content-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 50px rgba(212,175,55,0.12);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .card-icon-wrap {
+      flex-shrink: 0;
+      width: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 22px 10px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+      border-right: 1px solid rgba(212,175,55,0.2);
+      min-height: 100%;
+    }
+
+    .card-icon-emoji { font-size: 42px; display: block; margin-bottom: 6px; }
+
+    .card-num-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #d4af37, #f5e070);
+      color: #0a0a0a;
+      font-size: 13px;
+      font-weight: 900;
+      border-radius: 50%;
+    }
+
+    .card-body {
+      padding: 20px 20px 20px 18px;
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: clamp(17px, 4.5vw, 20px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+
+    .card-title em { font-style: normal; color: #f5e070; }
+
+    .card-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.75;
+    }
+
+    /* ===== FOR WHO ===== */
+    .forwho-section {
+      background: linear-gradient(135deg, rgba(99,179,237,0.07) 0%, rgba(99,179,237,0.02) 100%);
+      border: 1px solid rgba(99,179,237,0.2);
+      border-radius: 20px;
+      padding: 28px 22px;
+      margin-bottom: 44px;
+    }
+
+    .check-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(99,179,237,0.15);
+      border-left: 4px solid #63b3ed;
+      border-radius: 12px;
+    }
+
+    .check-icon-wrap {
+      flex-shrink: 0;
+      font-size: 28px;
+    }
+
+    .check-text {
+      font-size: 17px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
+    /* ===== PRICE ===== */
+    .price-section {
+      background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.04));
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 24px;
+      padding: 36px 22px 30px;
+      margin-bottom: 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #d4af37, #f5e070, #d4af37, transparent);
+    }
+
+    .sale-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #e53e3e, #fc8181);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      padding: 8px 24px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(229,62,62,0.4);
+      animation: pulse-red 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-red {
+      0%, 100% { box-shadow: 0 4px 20px rgba(229,62,62,0.4); }
+      50%       { box-shadow: 0 4px 30px rgba(229,62,62,0.7); }
+    }
+
+    .price-original {
+      font-size: 19px;
+      color: rgba(255,255,255,0.35);
+      text-decoration: line-through;
+      text-decoration-color: #fc8181;
+      margin-bottom: 6px;
+    }
+
+    .price-label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .price-main {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .price-currency {
+      font-size: 28px;
+      font-weight: 700;
+      color: #f5e070;
+      margin-bottom: 10px;
+    }
+
+    .price-num {
+      font-size: clamp(52px, 14vw, 72px);
+      font-weight: 900;
+      background: linear-gradient(180deg, #fff 0%, #f5e070 40%, #d4af37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .price-tax { font-size: 15px; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+    .price-note { font-size: 15px; color: rgba(255,255,255,0.5); }
+
+    /* ===== PAYMENT ===== */
+    .payment-section { margin-bottom: 50px; }
+
+    .payment-heading { text-align: center; margin-bottom: 22px; }
+    .payment-heading p {
+      font-size: 14px; color: #d4af37; letter-spacing: 3px;
+      font-weight: 700; margin-bottom: 6px;
+    }
+    .payment-heading h3 {
+      font-size: clamp(20px, 5vw, 24px);
+      font-weight: 900; color: #fff;
+    }
+
+    .payment-cards { display: flex; flex-direction: column; gap: 16px; }
+
+    .pay-card {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(212,175,55,0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .pay-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.4);
+    }
+
+    .pay-card.recommended {
+      border: 2px solid #d4af37;
+      box-shadow: 0 0 30px rgba(212,175,55,0.2);
+    }
+
+    .pay-card-header {
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .pay-card-header.gold   { background: linear-gradient(135deg, #b8860b, #d4af37, #f5e070); }
+    .pay-card-header.blue   { background: linear-gradient(135deg, #1a3a6c, #2a5aac); }
+    .pay-card-header.teal   { background: linear-gradient(135deg, #1a5c4c, #2a9c7c); }
+    .pay-card-header.purple { background: linear-gradient(135deg, #4a1a7c, #7a3acc); }
+
+    .pay-plan-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pay-plan-icon { font-size: 24px; }
+
+    .pay-plan-name {
+      font-size: 18px;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    .pay-plan-name.dark { color: #0a0a0a; text-shadow: none; }
+
+    .pay-plan-badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .pay-badge {
+      font-size: 12px;
+      font-weight: 900;
+      padding: 4px 12px;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+
+    .pay-badge.rec {
+      background: linear-gradient(135deg, #e53e3e, #fc8181);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(229,62,62,0.4);
+    }
+
+    .pay-badge.normal {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+    .pay-badge.normal.dark {
+      background: rgba(0,0,0,0.15);
+      color: #0a0a0a;
+    }
+
+    .pay-card-body {
+      padding: 20px 22px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .pay-amount-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .pay-amount-main {
+      font-size: clamp(24px, 6vw, 32px);
+      font-weight: 900;
+      color: #f5e070;
+      line-height: 1.1;
+    }
+
+    .pay-amount-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 3px;
+    }
+
+    .pay-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 26px;
+      font-size: 16px;
+      font-weight: 900;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: transform 0.15s ease;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+      min-width: 180px;
+    }
+
+    .pay-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: btn-shine 3s ease infinite;
+    }
+
+    @keyframes btn-shine {
+      0%   { left: -100%; }
+      40%  { left: 150%; }
+      100% { left: 150%; }
+    }
+
+    .pay-btn:hover  { transform: scale(1.03); }
+    .pay-btn:active { transform: scale(0.97); }
+
+    .pay-btn.gold-btn {
+      background: linear-gradient(135deg, #d4a017, #f5d020, #d4af37, #b8860b);
+      color: #0a0a0a;
+      box-shadow: 0 6px 24px rgba(212,175,55,0.45);
+    }
+
+    .pay-btn.blue-btn {
+      background: linear-gradient(135deg, #2a5aac, #4a8adc);
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(42,90,172,0.4);
+    }
+
+    .pay-btn.teal-btn {
+      background: linear-gradient(135deg, #2a9c7c, #4acc9c);
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(42,156,124,0.4);
+    }
+
+    .pay-btn.purple-btn {
+      background: linear-gradient(135deg, #7a3acc, #a06ae8);
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(122,58,204,0.4);
+    }
+
+    .pay-btn.locked {
+      opacity: 0.35;
+      filter: grayscale(0.6);
+      pointer-events: none;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+    .pay-btn.locked::before { animation: none; }
+
+    .agree-wrap {
+      margin: 0 auto 28px;
+      max-width: 520px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.04));
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .agree-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      cursor: pointer;
+    }
+    .agree-label input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      margin-top: 2px;
+      accent-color: #d4af37;
+      cursor: pointer;
+    }
+    .agree-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+    }
+    .agree-text a {
+      color: #f5e070;
+      text-decoration: underline;
+    }
+    .agree-hint {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .cta-security {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ===== VALUE SECTION ===== */
+    .value-section { margin-bottom: 44px; }
+
+    .value-compare {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .value-normal-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fc8181;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      padding: 6px 14px;
+      background: rgba(229,62,62,0.1);
+      border: 1px solid rgba(229,62,62,0.25);
+      border-radius: 8px;
+      width: fit-content;
+    }
+
+    .value-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 16px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-row.danger {
+      border-color: rgba(229,62,62,0.3);
+      background: rgba(229,62,62,0.05);
+    }
+
+    .value-row-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+
+    .value-row-illust {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .value-row-body { flex: 1; }
+
+    .value-row-label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 3px;
+    }
+
+    .value-row-price {
+      font-size: clamp(26px, 7vw, 36px);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    .value-row-price.red {
+      color: #fc8181;
+      text-shadow: 0 0 18px rgba(252,129,129,0.5);
+    }
+
+    .value-row-price.gold {
+      color: #f5e070;
+      text-shadow: 0 0 18px rgba(245,224,112,0.45);
+    }
+
+    .value-row-note {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      margin-top: 4px;
+    }
+
+    .value-vs {
+      text-align: center;
+      font-size: 22px;
+      color: rgba(255,255,255,0.2);
+      margin: 2px 0;
+    }
+
+    .value-arrow-down {
+      text-align: center;
+      margin: 4px 0;
+    }
+
+    .value-arrow-down svg {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .value-conclusion {
+      background: linear-gradient(135deg, rgba(212,175,55,0.14), rgba(212,175,55,0.04));
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 18px;
+      padding: 28px 22px;
+      text-align: center;
+      margin-top: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-conclusion::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .value-conclusion p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.85;
+    }
+
+    .skill-forever-text {
+      font-size: clamp(20px, 5.5vw, 26px);
+      font-weight: 900;
+      color: #f5e070;
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+    }
+
+    .skill-forever-text .highlight-word {
+      background: linear-gradient(135deg, #f5e070, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .value-conclusion-illust {
+      margin: 14px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* ===== 24H BANNER ===== */
+    .urgent-banner {
+      background: linear-gradient(135deg, #7c1a1a, #c53030);
+      border: 1px solid rgba(252,129,129,0.5);
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin-bottom: 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: urgent-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes urgent-pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(229,62,62,0.3); }
+      50%       { box-shadow: 0 0 40px rgba(229,62,62,0.6); }
+    }
+
+    .urgent-banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+      animation: btn-shine 3s ease infinite;
+    }
+
+    .urgent-icon { font-size: 32px; display: block; margin-bottom: 8px; }
+
+    .urgent-title {
+      font-size: clamp(17px, 4.5vw, 21px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .urgent-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+    }
+
+    /* ===== SUPPORT SECTION ===== */
+    .support-section { margin-bottom: 44px; }
+
+    .compare-box {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .compare-card {
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .compare-header {
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .compare-header.bad  { background: rgba(229,62,62,0.25); color: #fc8181; border: 1px solid rgba(229,62,62,0.3); border-radius: 16px 16px 0 0; }
+    .compare-header.good { background: rgba(212,175,55,0.2);  color: #f5e070; border: 1px solid rgba(212,175,55,0.35); border-radius: 16px 16px 0 0; }
+
+    .compare-body {
+      padding: 16px 18px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.8;
+    }
+
+    .compare-body.bad  { background: rgba(229,62,62,0.05);  border: 1px solid rgba(229,62,62,0.15); border-top: none; border-radius: 0 0 16px 16px; }
+    .compare-body.good { background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.2);  border-top: none; border-radius: 0 0 16px 16px; }
+
+    .support-card {
+      background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(212,175,55,0.03));
+      border: 1px solid rgba(212,175,55,0.35);
+      border-radius: 20px;
+      padding: 28px 22px;
+      text-align: center;
+    }
+
+    .support-card .support-icon { font-size: 52px; display: block; margin-bottom: 14px; }
+
+    .support-title {
+      font-size: clamp(20px, 5vw, 26px);
+      font-weight: 900;
+      color: #f5e070;
+      margin-bottom: 14px;
+      line-height: 1.45;
+    }
+
+    .support-desc {
+      font-size: 17px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.9;
+      margin-bottom: 18px;
+    }
+
+    .fish-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 14px;
+      padding: 18px 18px;
+      margin-top: 16px;
+    }
+
+    .fish-box p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.85;
+    }
+
+    .fish-box .fish-highlight {
+      font-size: 17px;
+      font-weight: 900;
+      color: #f5e070;
+      margin-top: 10px;
+      display: block;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-section { margin-bottom: 50px; }
+
+    .faq-list { display: flex; flex-direction: column; gap: 14px; }
+
+    .faq-item {
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 20px;
+      background: rgba(255,255,255,0.04);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .faq-q-label {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, #d4af37, #f5e070);
+      color: #0a0a0a;
+      font-weight: 900;
+      font-size: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .faq-q-text {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      padding: 0 20px;
+    }
+
+    .faq-a.open { max-height: 300px; padding: 0 20px 18px; }
+
+    .faq-a p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.85;
+      border-top: 1px solid rgba(212,175,55,0.15);
+      padding-top: 14px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: #d4af37; }
+
+    .footer p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.2);
+      line-height: 2;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 480px) {
+      .visual-row { gap: 8px; }
+      .visual-chip { padding: 14px 6px; }
+      .visual-chip .vc-icon { font-size: 28px; }
+      .visual-chip .vc-text { font-size: 12px; }
+      .card-icon-wrap { width: 70px; }
+      .card-icon-emoji { font-size: 32px; }
+      .pay-amount-row { flex-direction: column; align-items: flex-start; }
+      .pay-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="particles" id="particles"></div>
+
+  <div class="bg-wrapper">
+    <div class="container">
+
+      <!-- Top badge -->
+      <div class="top-badge">
+        <div class="badge-label">✦ Claude Code完全マスタースクール ✦</div>
+      </div>
+
+      <!-- Hero -->
+      <div class="hero">
+        <p class="hero-eyecatch">AIを使って、仕事を自動化する時代へ</p>
+        <h1 class="hero-title">
+          <em>Claude Code</em><br>完全マスタースクール
+          完全初心者でも<br>できる！
+        </h1>
+        <p class="hero-lead">
+          インストールから使い方まで<br>
+          <strong>丁寧にやさしく解説。</strong><br>
+          AIが面倒な作業を<br>
+          自動でやってくれます。
+        </p>
+        <div class="gold-divider"><span>✦</span></div>
+      </div>
+
+      <!-- Visual chips -->
+      <div class="visual-row">
+        <div class="visual-chip">
+          <span class="vc-icon">🖥️</span>
+          <span class="vc-text">初心者<br>対応</span>
+        </div>
+        <div class="visual-chip">
+          <span class="vc-icon">📱</span>
+          <span class="vc-text">MacBook・Windows<br>両対応</span>
+        </div>
+        <div class="visual-chip">
+          <span class="vc-icon">🤖</span>
+          <span class="vc-text">AI自動化<br>実践</span>
+        </div>
+        <div class="visual-chip">
+          <span class="vc-icon">🎮</span>
+          <span class="vc-text">ゲームも<br>作れる！</span>
+        </div>
+      </div>
+
+      <!-- Problem section -->
+      <div class="problem-section">
+        <p class="section-label">- こんなお悩み、ありませんか？ -</p>
+        <div class="problem-grid">
+          <div class="problem-item">
+            <div class="problem-x">✗</div>
+            <div class="problem-text">Claude Codeって<br>何をするものか分からない</div>
+          </div>
+          <div class="problem-item">
+            <div class="problem-x">✗</div>
+            <div class="problem-text">インストールが複雑そうで<br>挫折しそうで怖い</div>
+          </div>
+          <div class="problem-item">
+            <div class="problem-x">✗</div>
+            <div class="problem-text">AIへの指示の出し方が<br>分からない</div>
+          </div>
+          <div class="problem-item">
+            <div class="problem-x">✗</div>
+            <div class="problem-text">毎日の単純作業に<br>時間がかかりすぎる</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="solve-arrow">↓</div>
+
+      <div class="solve-box">
+        <span class="solve-icon">✨</span>
+        <p>
+          このスクールで<strong style="color:#fff;">全て解決！</strong><br>
+          専門知識ゼロからでも<br>
+          必ずできるようになります
+        </p>
+      </div>
+
+      <!-- Course Contents -->
+      <div class="contents-section">
+        <div class="section-heading">
+          <span class="label">- COURSE CONTENTS -</span>
+          <h2>スクール内容はこちら</h2>
+        </div>
+
+        <div class="content-cards">
+
+          <div class="content-card">
+            <div class="card-top">
+              <div class="card-icon-wrap">
+                <span class="card-icon-emoji">💻</span>
+                <span class="card-num-badge">1</span>
+              </div>
+              <div class="card-body">
+                <div class="card-title">VS Code<em>インストール方法</em></div>
+                <div class="card-desc">MacBook・Windows どちらも対応。公式サイトからの安全な手順で日本語化まで完了。</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card">
+            <div class="card-top">
+              <div class="card-icon-wrap">
+                <span class="card-icon-emoji">🤖</span>
+                <span class="card-num-badge">2</span>
+              </div>
+              <div class="card-body">
+                <div class="card-title">Claude Code<em>インストール方法</em></div>
+                <div class="card-desc">スクショ付きで丁寧に解説。Googleアカウントで簡単ログインまでサポート。</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card">
+            <div class="card-top">
+              <div class="card-icon-wrap">
+                <span class="card-icon-emoji">💬</span>
+                <span class="card-num-badge">3</span>
+              </div>
+              <div class="card-body">
+                <div class="card-title">Claude Codeの<em>使い方＆指示の出し方</em></div>
+                <div class="card-desc">2つのパターンで解説。AIに「伝わる指示の出し方」のコツを習得。</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card">
+            <div class="card-top">
+              <div class="card-icon-wrap">
+                <span class="card-icon-emoji">🎮</span>
+                <span class="card-num-badge">4</span>
+              </div>
+              <div class="card-body">
+                <div class="card-title">実践！<em>テトリスを作ってみよう</em></div>
+                <div class="card-desc">「テトリスを作って」と一言入力するだけで本物のゲームが完成！AIの力を体感。</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card">
+            <div class="card-top">
+              <div class="card-icon-wrap">
+                <span class="card-icon-emoji">⚡</span>
+                <span class="card-num-badge">5</span>
+              </div>
+              <div class="card-body">
+                <div class="card-title"><em>実際の活用例</em>で業務効率化</div>
+                <div class="card-desc">メール・データ入力・資料整理など、自分の仕事をAIで効率化する方法を解説。</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card">
+            <div class="card-top">
+              <div class="card-icon-wrap">
+                <span class="card-icon-emoji">⚙️</span>
+                <span class="card-num-badge">6</span>
+              </div>
+              <div class="card-body">
+                <div class="card-title"><em>ターミナル</em>の初期設定</div>
+                <div class="card-desc">コピペするだけで完了。MacBook（Homebrew）・Windows（WSL2）両対応。</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- For Who -->
+      <div class="forwho-section">
+        <p class="section-label">- こんな方におすすめ -</p>
+        <div class="check-grid">
+          <div class="check-row">
+            <div class="check-icon-wrap">🙋</div>
+            <div class="check-text">AIに興味があるけど<br>どこから始めれば分からない方</div>
+          </div>
+          <div class="check-row">
+            <div class="check-icon-wrap">😫</div>
+            <div class="check-text">毎日の単純作業を<br>もっと楽にしたい方</div>
+          </div>
+          <div class="check-row">
+            <div class="check-icon-wrap">💪</div>
+            <div class="check-text">プログラミング未経験でも<br>自分でツールを作ってみたい方</div>
+          </div>
+          <div class="check-row">
+            <div class="check-icon-wrap">📖</div>
+            <div class="check-text">大きな文字・丁寧な解説で<br>自分のペースで学びたい方</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 外注費比較セクション -->
+      <div class="value-section">
+        <div class="section-heading">
+          <span class="label">- なぜ今、学ぶべきなのか -</span>
+          <h2>外注 vs 自分でやる。<br>どちらが合理的？</h2>
+        </div>
+
+        <div class="value-normal-label">💸 普通にやろうとすると…</div>
+
+        <div class="value-compare">
+          <div class="value-row danger">
+            <div class="value-row-illust">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="12" fill="rgba(229,62,62,0.15)"/>
+                <rect x="10" y="14" width="28" height="20" rx="3" fill="none" stroke="#fc8181" stroke-width="1.8"/>
+                <rect x="14" y="18" width="8" height="6" rx="1.5" fill="#fc8181" opacity="0.7"/>
+                <line x1="14" y1="27" x2="22" y2="27" stroke="#fc8181" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                <line x1="14" y1="30" x2="26" y2="30" stroke="#fc8181" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                <circle cx="36" cy="13" r="6" fill="#fc8181" opacity="0.9"/>
+                <text x="36" y="17" text-anchor="middle" fill="#1a0000" font-size="9" font-weight="900">¥</text>
+              </svg>
+            </div>
+            <div class="value-row-body">
+              <div class="value-row-label">業務自動化を専門会社に外注した場合</div>
+              <div class="value-row-price red">150万〜300万円</div>
+              <div class="value-row-note">修正のたびに追加費用。一回作ったら終わり。</div>
+            </div>
+          </div>
+
+          <div class="value-row danger">
+            <div class="value-row-illust">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="12" fill="rgba(229,62,62,0.15)"/>
+                <circle cx="24" cy="18" r="6" fill="none" stroke="#fc8181" stroke-width="1.8"/>
+                <path d="M14 36c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#fc8181" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M32 22l3-3m0 0l2-2m-2 2l2 2m-2-2l-2-2" stroke="#fc8181" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+                <circle cx="38" cy="13" r="5" fill="#fc8181" opacity="0.9"/>
+                <text x="38" y="17" text-anchor="middle" fill="#1a0000" font-size="9" font-weight="900">¥</text>
+              </svg>
+            </div>
+            <div class="value-row-body">
+              <div class="value-row-label">事務アシスタントを1人雇った場合</div>
+              <div class="value-row-price red">年間200万〜300万円</div>
+              <div class="value-row-note">人件費・社会保険・交通費…これが毎年かかる。</div>
+            </div>
+          </div>
+
+          <div class="value-arrow-down">
+            <svg width="36" height="28" viewBox="0 0 36 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 2 L18 20" stroke="rgba(245,224,112,0.4)" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M10 14 L18 22 L26 14" stroke="rgba(245,224,112,0.4)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <div class="value-row" style="border-color:rgba(212,175,55,0.45);background:rgba(212,175,55,0.08);">
+            <div class="value-row-illust">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="12" fill="rgba(212,175,55,0.15)"/>
+                <circle cx="24" cy="20" r="7" fill="none" stroke="#f5e070" stroke-width="1.8"/>
+                <path d="M21 27h6v2.5a3 3 0 01-6 0V27z" fill="none" stroke="#f5e070" stroke-width="1.5"/>
+                <line x1="20" y1="31" x2="28" y2="31" stroke="#f5e070" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="24" y1="13" x2="24" y2="11" stroke="#f5e070" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="17.5" y1="15.5" x2="16" y2="14" stroke="#f5e070" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="30.5" y1="15.5" x2="32" y2="14" stroke="#f5e070" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="24" cy="20" r="2.5" fill="#f5e070" opacity="0.5"/>
+              </svg>
+            </div>
+            <div class="value-row-body">
+              <div class="value-row-label">このスクールで一度スキルを身につけたら</div>
+              <div class="value-row-price gold">外注費・人件費が一生ゼロに</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="value-conclusion">
+          <div class="value-conclusion-illust">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="19" fill="rgba(212,175,55,0.15)" stroke="rgba(212,175,55,0.4)" stroke-width="1.5"/>
+              <path d="M13 20l5 5 9-10" stroke="#f5e070" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="skill-forever-text" style="margin-top:14px;">
+            スキルは<span class="highlight-word">一度身についたら</span>、<br>ずっとあなたの手元に残る
+          </div>
+        </div>
+      </div>
+
+      <!-- 24時間特典バナー -->
+      <div class="urgent-banner">
+        <span class="urgent-icon">⏰</span>
+        <div class="urgent-title">
+          今から24時間以内にお申込みの方限定で<br>
+          <span style="color:#ffd700;">追加の無料特典</span>をプレゼント！
+        </div>
+        <div class="urgent-desc">
+          このページを開いた今がチャンスです。<br>
+          24時間を過ぎると特典は終了します。
+        </div>
+      </div>
+
+      <!-- サポート哲学セクション -->
+      <div class="support-section">
+        <div class="section-heading">
+          <span class="label">- このスクールが選ばれる理由 -</span>
+          <h2>他のスクールとの決定的な違い</h2>
+        </div>
+
+        <div class="compare-box">
+          <!-- 他の講座 -->
+          <div class="compare-card">
+            <div class="compare-header bad">
+              <span>❌</span> 一般的なAIスクールの問題点
+            </div>
+            <div class="compare-body bad">
+              講師に質問して「答えを教えてもらう」スタイルが主流。<br>
+              サポート期間が終わると、<strong style="color:#fc8181;">自分の力だけでは進めない</strong>人が出てしまいます。<br>
+              結局、講師がいないと動けない状態になってしまうのが最大のデメリット。
+            </div>
+          </div>
+
+          <!-- この講座 -->
+          <div class="compare-card">
+            <div class="compare-header good">
+              <span>✦</span> Claude Code完全マスタースクールのアプローチ
+            </div>
+            <div class="compare-body good">
+              わからないことがあれば、いつでも質問OK。<br>
+              ただし、<strong style="color:#f5e070;">私は答えを直接教えません。</strong><br>
+              「AIにこう聞けばその答えが返ってくる」という<br>
+              <strong style="color:#f5e070;">AIへの聞き方そのものを教えます。</strong><br>
+              それを繰り返すことで、スクールが終わった後も<br>
+              <strong style="color:#f5e070;">自分1人の力でどんどん進んでいける</strong>ようになります。
+            </div>
+          </div>
+        </div>
+
+        <div class="support-card">
+          <span class="support-icon">🎣</span>
+          <div class="support-title">
+            魚を与えるのではなく<br>
+            「魚の釣り方」を教えます
+          </div>
+          <div class="support-desc">
+            スクールが終わった後でも、<br>
+            <strong style="color:#fff;">自分の力で仕事もプライベートも</strong><br>
+            うまく進んでいける状態を目指します。
+          </div>
+          <div class="fish-box">
+            <p>
+              疑問が出てきたとき、その答えを「もらう」のではなく、<br>
+              <strong style="color:#fff;">AIに聞いて自分で引き出せる力</strong>が身につきます。<br>
+              この力は、どんな新しいAIが出てきても一生使い続けられます。
+            </p>
+
+            <!-- サポート内容テーブル -->
+            <div style="margin-top:20px;display:flex;flex-direction:column;gap:12px;">
+
+              <!-- 24時間特典 -->
+              <div style="background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.4);border-radius:14px;padding:16px 18px;">
+                <div style="font-size:13px;color:#d4af37;font-weight:900;letter-spacing:1px;margin-bottom:6px;">⏰ 24時間以内お申込み限定特典</div>
+                <div style="font-size:16px;font-weight:900;color:#fff;margin-bottom:6px;">🏅 1か月間の個別サポート</div>
+                <div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.85;">
+                  このページを開いてから<strong style="color:#f5e070;">24時間以内</strong>にお申込みの方を対象に、<br>
+                  購入日から<strong style="color:#f5e070;">1か月間</strong>、個別サポートを提供します。<br>
+                  教材の内容に関する質問や不明点についても、この期間中に個別でお答えします。
+                </div>
+              </div>
+
+              <!-- 24時間以外 -->
+              <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:16px 18px;">
+                <div style="font-size:13px;color:rgba(255,255,255,0.45);font-weight:900;letter-spacing:1px;margin-bottom:6px;">📦 24時間以降にお申込みの場合</div>
+                <div style="font-size:15px;font-weight:900;color:rgba(255,255,255,0.85);margin-bottom:6px;">教材・資料・動画コンテンツの提供</div>
+                <div style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.85;">
+                  24時間の特典期間を過ぎた場合は、<strong style="color:rgba(255,255,255,0.85);">教材・資料・動画コンテンツのみ</strong>の提供となります。<br>
+                  教材の内容に関してわからない点がある場合はご質問いただけますが、<br>
+                  <strong style="color:#fc8181;">個別サポートは24時間以内のお申込み特典対象者限定</strong>となりますのでご注意ください。
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Price section -->
+      <div class="price-section">
+        <div class="sale-badge">🏷️ 初回購入者限定価格</div>
+        <p class="price-original">通常価格　¥300,000</p>
+        <p class="price-label">- 初回購入者限定価格 -</p>
+        <div class="price-main">
+          <span class="price-currency">¥</span>
+          <span class="price-num">237,600</span>
+        </div>
+        <p class="price-tax">（税込）</p>
+        <p class="price-note">買い切り型・一度購入すればずっと使えます</p>
+      </div>
+
+      <!-- Payment options -->
+      <div class="payment-section">
+        <div class="payment-heading">
+          <p>- お支払い方法を選んでください -</p>
+          <h3>受講方法を選択する</h3>
+        </div>
+
+        <!-- 同意チェックボックス -->
+        <div class="agree-wrap">
+          <label class="agree-label" for="agreeCheck">
+            <input type="checkbox" id="agreeCheck" onchange="togglePayBtns(this)">
+            <span class="agree-text">
+              <a href="tokusho.html" target="_blank" rel="noopener">特定商取引法に基づく表記</a>を確認し、内容に同意します
+            </span>
+          </label>
+          <p class="agree-hint">※ チェックを入れると申込ボタンが有効になります</p>
+        </div>
+
+        <div class="payment-cards">
+
+          <!-- 一括払い -->
+          <div class="pay-card recommended">
+            <div class="pay-card-header gold">
+              <div class="pay-plan-left">
+                <span class="pay-plan-icon">💳</span>
+                <span class="pay-plan-name dark">一括払い</span>
+              </div>
+              <div class="pay-plan-badges">
+                <span class="pay-badge rec">おすすめ</span>
+              </div>
+            </div>
+            <div class="pay-card-body">
+              <div class="pay-amount-row">
+                <div>
+                  <div class="pay-amount-main">¥237,600</div>
+                  <div class="pay-amount-sub">税込・1回払い</div>
+                </div>
+                <!-- ★ href に一括払いの決済URLを入力してください ★ -->
+                <a href="https://buy.stripe.com/5kQfZh72o7K03yCaD8cwg03" class="pay-btn gold-btn locked" target="_blank" rel="noopener">
+                  🎓 スクールを受講する →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12回分割 -->
+          <div class="pay-card recommended">
+            <div class="pay-card-header blue">
+              <div class="pay-plan-left">
+                <span class="pay-plan-icon">📅</span>
+                <span class="pay-plan-name">12回分割払い</span>
+              </div>
+              <div class="pay-plan-badges">
+                <span class="pay-badge rec">おすすめ</span>
+                <span class="pay-badge normal">月々ラクラク</span>
+              </div>
+            </div>
+            <div class="pay-card-body">
+              <div class="pay-amount-row">
+                <div>
+                  <div class="pay-amount-main">¥19,800<span style="font-size:16px;color:rgba(255,255,255,0.5)">/月</span></div>
+                  <div class="pay-amount-sub">× 12回　合計 ¥237,600（税込）</div>
+                </div>
+                <!-- ★ href に12回分割の決済URLを入力してください ★ -->
+                <a href="https://dragonryu.base.shop/items/146132716" class="pay-btn blue-btn locked" target="_blank" rel="noopener">
+                  🎓 スクールを受講する →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6回分割 -->
+          <div class="pay-card">
+            <div class="pay-card-header teal">
+              <div class="pay-plan-left">
+                <span class="pay-plan-icon">📅</span>
+                <span class="pay-plan-name">6回分割払い</span>
+              </div>
+              <div class="pay-plan-badges">
+                <span class="pay-badge normal">半年で完了</span>
+              </div>
+            </div>
+            <div class="pay-card-body">
+              <div class="pay-amount-row">
+                <div>
+                  <div class="pay-amount-main">¥39,600<span style="font-size:16px;color:rgba(255,255,255,0.5)">/月</span></div>
+                  <div class="pay-amount-sub">× 6回　合計 ¥237,600（税込）</div>
+                </div>
+                <!-- ★ href に6回分割の決済URLを入力してください ★ -->
+                <a href="https://dragonryu.base.shop/items/146132752" class="pay-btn teal-btn locked" target="_blank" rel="noopener">
+                  🎓 スクールを受講する →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3回分割 -->
+          <div class="pay-card">
+            <div class="pay-card-header purple">
+              <div class="pay-plan-left">
+                <span class="pay-plan-icon">📅</span>
+                <span class="pay-plan-name">3回分割払い</span>
+              </div>
+              <div class="pay-plan-badges">
+                <span class="pay-badge normal">3ヶ月で完了</span>
+              </div>
+            </div>
+            <div class="pay-card-body">
+              <div class="pay-amount-row">
+                <div>
+                  <div class="pay-amount-main">¥79,200<span style="font-size:16px;color:rgba(255,255,255,0.5)">/月</span></div>
+                  <div class="pay-amount-sub">× 3回　合計 ¥237,600（税込）</div>
+                </div>
+                <!-- ★ href に3回分割の決済URLを入力してください ★ -->
+                <a href="https://dragonryu.base.shop/items/146132768" class="pay-btn purple-btn locked" target="_blank" rel="noopener">
+                  🎓 スクールを受講する →
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="cta-security">🔒 安全な決済環境でご購入いただけます</p>
+      </div>
+
+      <!-- FAQ -->
+      <div class="faq-section">
+        <div class="section-heading" style="margin-bottom:20px;">
+          <span class="label">- FAQ -</span>
+          <h2>よくあるご質問</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <div class="faq-q-label">Q</div>
+              <div class="faq-q-text">パソコンが苦手でも大丈夫ですか？</div>
+            </div>
+            <div class="faq-a">
+              <p>はい、大丈夫です。クリック・文字入力ができれば進められます。手順ひとつひとつを丁寧に解説しているので、初めての方も安心です。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <div class="faq-q-label">Q</div>
+              <div class="faq-q-text">MacBookとWindowsどちらでも使えますか？</div>
+            </div>
+            <div class="faq-a">
+              <p>はい、両方に対応しています。各手順でMacBook用・Windows用に分けて解説しているのでご安心ください。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <div class="faq-q-label">Q</div>
+              <div class="faq-q-text">購入後すぐに使えますか？</div>
+            </div>
+            <div class="faq-a">
+              <p>はい、ご決済完了後すぐにPDFをお届けします。スマートフォン・パソコン・タブレットからいつでもご覧いただけます。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <div class="faq-q-label">Q</div>
+              <div class="faq-q-text">返金はできますか？</div>
+            </div>
+            <div class="faq-a">
+              <p>デジタルコンテンツの性質上、ご購入後の返金はお受けしておりません。ご不明な点は購入前に公式LINEよりお問い合わせください。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <div class="footer-links">
+          <a href="https://zingy-chebakia-c1a15c.netlify.app/" target="_blank" rel="noopener">特定商取引法に基づく表記</a>
+        </div>
+        <p>
+          ご不明な点はお気軽に公式LINEよりお問い合わせください。<br>
+          © 2025 まほのスマホ相談所
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 28; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 3 + 1;
+      p.style.cssText = `
+        width:${size}px; height:${size}px;
+        left:${Math.random()*100}%;
+        bottom:-10px;
+        animation-duration:${Math.random()*15+12}s;
+        animation-delay:${Math.random()*18}s;
+        background:${Math.random()>0.45 ? 'rgba(212,175,55,0.7)' : 'rgba(99,179,237,0.5)'};
+      `;
+      container.appendChild(p);
+    }
+
+    function toggleFaq(el) {
+      el.nextElementSibling.classList.toggle('open');
+    }
+
+    function togglePayBtns(cb) {
+      document.querySelectorAll('.pay-btn').forEach(function(btn) {
+        btn.classList.toggle('locked', !cb.checked);
+      });
+    }
+  </script>
+</body>
+</html>
